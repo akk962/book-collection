@@ -1,0 +1,29 @@
+<%= form_with(model: userbook) do |form| %>
+  <% if userbook.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(userbook.errors.count, "error") %> prohibited this userbook from being saved:</h2>
+
+      <ul>
+        <% userbook.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <% options = options_from_collection_for_select(@users, 'id', 'username') %>
+    <%= form.select :user_id,  options %>
+  </div>
+
+  <div class="field">
+    <%= form.label :book_id %>
+    <% options = options_from_collection_for_select(@books, 'id', 'title') %>
+    <%= form.select :book_id,  options %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
